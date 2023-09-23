@@ -34,7 +34,7 @@ void sort_list_check(listint_t *list)
 
 	head = list;
 
-	while(head)
+	while (head)
 	{
 		if (head->n > head->next->n)
 			flag++;
