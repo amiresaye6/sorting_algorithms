@@ -21,3 +21,29 @@ void print_list(const listint_t *list)
 	}
 	printf("\n");
 }
+
+/**
+ * sort_list_check - checks for correct sorting
+ *
+ * @list: The list to be checked
+*/
+void sort_list_check(listint_t *list)
+{
+	listint_t *head;
+	int flag = 0;
+
+	head = list;
+
+	while(head)
+	{
+		if (head->n > head->next->n)
+			flag++;
+		head = head->next;
+	}
+	if (flag == 0)
+	{
+		printf("list sorted correctly )\n");
+		return;
+	}
+	printf("%d errors :(\n", flag);
+}

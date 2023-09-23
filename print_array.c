@@ -24,7 +24,7 @@ void print_array(const int *array, size_t size)
 
 /**
  * sort_array_check - checks for correct sorting
- * @array: The array to be printed
+ * @array: The array to be checked
  * @size: Number of elements in @array
 */
 
