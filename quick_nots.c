@@ -36,9 +36,13 @@ size_t lomuto(int *array, size_t start, size_t end)
 		{
 			index++;
 			swap(array, i, index);
+			print_array(array, sizeof(array) + 2);
 		}
 	}
 	swap(array, end, index + 1);
+	if (end > index + 1)
+		print_array(array, sizeof(array) + 2);
+
 	return (index + 1);
 }
 
@@ -57,7 +61,7 @@ void quick_sort_helper(int *array, int low, int high, const size_t size)
 	{
 		size_t pi = lomuto(array, low, high);
 
-		print_array(array, size);
+
 
 		quick_sort_helper(array, low, pi - 1, size);
 		quick_sort_helper(array, pi + 1, high, size);
