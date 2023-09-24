@@ -37,7 +37,7 @@ void sort_array_check(const int *array, size_t size)
 	{
 		if (array[i - 1] > array[i])
 		{
-			printf("error at index %ld\n", i);
+			printf("error at index\n");
 			c++;
 		}
 	}
