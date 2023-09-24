@@ -39,6 +39,12 @@ void insertion_sort_list(listint_t **list)
 			return;
 	}
 }
+/**
+ * swap_nodes - swap 2 nodes
+ * @node1: the node1
+ *
+ * Return: the first node.
+*/
 listint_t *swap_nodes(listint_t *node1)
 {
 	listint_t *node2 = node1->next;
@@ -55,10 +61,6 @@ listint_t *swap_nodes(listint_t *node1)
 		node2->next = node1;
 		node2->prev = NULL;
 	}
-
-	/**
-	 * node2 : last node.
-	 */
 	else if (node2->next == NULL)
 	{
 		node2->prev = node1->prev;
@@ -67,10 +69,6 @@ listint_t *swap_nodes(listint_t *node1)
 		node1->prev = node2;
 		node2->next = node1;
 	}
-
-	/**
-	 * node1 & node2 middles nodes
-	 */
 	else
 	{
 		node1->next = node2->next;
@@ -83,6 +81,5 @@ listint_t *swap_nodes(listint_t *node1)
 
 		node1->prev = node2;
 	}
-
-	return node2;
+	return (node2);
 }
