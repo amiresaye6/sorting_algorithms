@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
- * selection_sort - sorting using selection algorithm.
+ * quick_sort - sorts an array using the Quick sort algorithm
  * @array: the array to be sorted.
  * @size: the size of the array.
  *
@@ -9,6 +9,6 @@
  */
 void quick_sort(int *array, size_t size)
 {
-    if (size < 2)
-        return;
+	if (size < 2)
+		return;
 }
