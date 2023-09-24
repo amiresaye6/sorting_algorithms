@@ -8,41 +8,81 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *sorted, *curr, *next, *aux, *temp;
+	listint_t *current;
+	int swap = 0;
 
-	sorted = NULL;
-	curr = *list;
-	while (curr != NULL)
+	current = list[0];
+
+	if (list == NULL || *list == NULL || current->next == NULL)
+		return;
+
+	while (1)
 	{
-		next = curr->next;
-/*if it is the first node or it is sorted untel the next continue*/
-		if (sorted == NULL || sorted->n > curr->n)
+		swap = 0;
+		current = list[0];
+		while (current)
 		{
-			curr->next = sorted;
-			sorted = curr;
-		}
-		else
-		{
-			aux = sorted;
-			while (aux->next != NULL && aux->next->n <= curr->n)
-				aux = aux->next;
-
-			if (aux->next == NULL)
+			if (current->next && current->n > current->next->n)
 			{
-				aux->next = curr;
-				curr->prev = aux;
-				curr->next = NULL;
+				current = swap_nodes(current);
+				if (current->prev == NULL)
+				{
+					list[0] = current;
+				}
+				swap = 1;
+				print_list(*list);
+				break;
 			}
-			else
-			{
-				temp = aux->next;
-				aux->next = curr;
-				curr->prev = aux;
-				curr->next = temp;
-				temp->prev = curr;
-			}
+			current = current->next;
 		}
-		curr = next;
+		if (swap == 0)
+			return;
 	}
-	*list = sorted;
+}
+listint_t *swap_nodes(listint_t *node1)
+{
+	listint_t *node2 = node1->next;
+
+	/**
+	 * node1 : first node.
+	 */
+	if (node1->prev == NULL)
+	{
+		node1->next = node2->next;
+		node2->next->prev = node1;
+
+		node1->prev = node2;
+		node2->next = node1;
+		node2->prev = NULL;
+	}
+
+	/**
+	 * node2 : last node.
+	 */
+	else if (node2->next == NULL)
+	{
+		node2->prev = node1->prev;
+		node1->next = NULL;
+		node1->prev->next = node2;
+		node1->prev = node2;
+		node2->next = node1;
+	}
+
+	/**
+	 * node1 & node2 middles nodes
+	 */
+	else
+	{
+		node1->next = node2->next;
+		node2->next->prev = node1;
+
+		node1->prev->next = node2;
+		node2->prev = node1->prev;
+
+		node2->next = node1;
+
+		node1->prev = node2;
+	}
+
+	return node2;
 }
