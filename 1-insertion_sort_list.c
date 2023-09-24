@@ -13,7 +13,7 @@ void insertion_sort_list(listint_t **list)
 
 	current = list[0];
 
-	if (list == NULL || *list == NULL || current->next == NULL)
+	if (!list || !(*list) || !(*list)->next)
 		return;
 
 	while (1)
@@ -44,7 +44,7 @@ void insertion_sort_list(listint_t **list)
  * @node1: the node1
  *
  * Return: the first node.
-*/
+ */
 listint_t *swap_nodes(listint_t *node1)
 {
 	listint_t *node2 = node1->next;
