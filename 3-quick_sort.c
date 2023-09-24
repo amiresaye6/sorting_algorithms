@@ -9,6 +9,9 @@
  */
 void quick_sort(int *array, size_t size)
 {
+	if (!array || size <= 1)
+		return;
+
 	quick_sort_helper(array, 0, size - 1, size);
 }
 
@@ -24,16 +27,15 @@ void quick_sort(int *array, size_t size)
 size_t lomuto(int *array, size_t start, size_t end)
 {
 	int pivot = array[end];
-	/*keeps track of the last elment swaped*/
 	size_t index = start - 1;
-	size_t j;
+	size_t i;
 
-	for (j = start; j < end; j++)
+	for (i = start; i < end; i++)
 	{
-		if (array[j] < pivot)
+		if (array[i] < pivot)
 		{
 			index++;
-			swap(array, j, index);
+			swap(array, i, index);
 		}
 	}
 	swap(array, end, index + 1);
