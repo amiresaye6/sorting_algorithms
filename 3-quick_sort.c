@@ -5,7 +5,7 @@
  * @array: the array to be sorted.
  * @size: the size of the array.
  *
- * Return: Void.
+ * Return: Void
  */
 void quick_sort(int *array, size_t size)
 {
