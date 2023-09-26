@@ -1,80 +1,71 @@
 #include "sort.h"
-
 /**
- * quick_sort - sorts an array using the Quick sort algorithm
- * @array: the array to be sorted.
- * @size: the size of the array.
- *
- * Return: Void
+ * quick_sort - quicksort algorithm
+ * @array: array to be sorted
+ * @size: size of array
  */
 void quick_sort(int *array, size_t size)
 {
-	if (!array || size <= 1)
+	if (array == NULL || size <= 1)
 		return;
-
-	quick_sort_helper(array, 0, size - 1, size);
+	sort_alg(array, 0, size - 1, size);
 }
 
 /**
- * lomuto - Lomuto partition scheme
- *
- * @array: the array to be sorted
- * @start: the start of the partition
- * @end: the end of the partition
- *
- * Return: the last index being swaped
+ * sort_alg - recursive sorting algorithm
+ * @arr: array
+ * @left: leftmost index
+ * @right: rightmost index
+ * @size: full size of array
  */
-size_t lomuto(int *array, size_t start, size_t end)
+void sort_alg(int *arr, int left, int right, size_t size)
 {
-	int pivot = array[end];
-	size_t index = start - 1;
-	size_t i;
+	int pivot;
 
-	for (i = start; i < end; i++)
+	if (left < right)
 	{
-		if (array[i] < pivot)
+		pivot = split(arr, left, right, size);
+		sort_alg(arr, left, pivot - 1, size);
+		sort_alg(arr, pivot + 1, right, size);
+	}
+}
+
+/**
+ * split - split array
+ * @arr: array
+ * @left: leftmost index
+ * @right: rightmost index
+ * @size: full array size
+ * Return: pivot index
+ */
+int split(int *arr, int left, int right, size_t size)
+{
+	int i, i2, pivot, tmp;
+
+	pivot = arr[right];
+	i = left;
+
+	for (i2 = left; i2 < right; i2++)
+	{
+		if (arr[i2] < pivot)
 		{
-			index++;
-			swap(array, i, index);
+			if (i != i2)
+			{
+				tmp = arr[i2];
+				arr[i2] = arr[i];
+				arr[i] = tmp;
+				print_array(arr, size);
+			}
+			i++;
 		}
 	}
-	swap(array, end, index + 1);
-	return (index + 1);
-}
-
-/**
- * quick_sort_helper - recursion part of quick sort
- *
- * @array: the array to be sorted
- * @low: the start of the partition
- * @high: the end of the partition
- * @size: the size of the array (const)
- *
- */
-void quick_sort_helper(int *array, int low, int high, const size_t size)
-{
-	if (low < high)
+	if (arr[i] != arr[right])
 	{
-		size_t pi = lomuto(array, low, high);
-
-		print_array(array, size);
-
-		quick_sort_helper(array, low, pi - 1, size);
-		quick_sort_helper(array, pi + 1, high, size);
+		tmp = arr[i];
+		arr[i] = arr[right];
+		arr[right] = tmp;
+		print_array(arr, size);
 	}
-}
-/**
- * swap - swaps two numbers in an array
- * @array: the array we want to swap in
- * @num1: first number
- * @num2: second number
- */
 
-void swap(int *array, size_t num1, size_t num2)
-{
-	int temp;
-
-	temp = array[num1];
-	array[num1] = array[num2];
-	array[num2] = temp;
+	return (i);
 }
